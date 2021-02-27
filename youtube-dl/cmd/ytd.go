@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strings"
 	"sync"
 )
 
@@ -34,18 +35,26 @@ func RunCmd(url string, wg *sync.WaitGroup, i int) {
 	if err = cmd.Start(); err != nil {
 		fmt.Printf("cmd.Run产生的错误:%v",err)
 	}
+	fn:=split(url)
 	// 从管道中实时获取输出并打印到终端
 	for {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
-		fmt.Printf("NO.%d的Goroutine输出:%s\n",i,string(tmp))
+		//写成输出日志
+		fmt.Printf("输出:%s\n",fn,string(tmp))
 		if err != nil {
 			break
 		}
 	}
-	fmt.Printf("下载NO.%d完成\n", i)
+
 	if err = cmd.Wait(); err != nil {
-		fmt.Println(err)
+		fmt.Printf("\n命令运行期间产生的错误:%v\t对应文件:%v\n",err,fn)
 	}
+	fmt.Printf("下载文件%v完成\n",fn)
 	wg.Done()
+}
+func split(s string)string  {
+	strs:=strings.Split(s,"/")
+	suffix:=strs[len(strs)-1]
+	return suffix
 }
