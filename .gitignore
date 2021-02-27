@@ -2,7 +2,8 @@
 .*
 # 排除所有.class文件:
 *.class
-
+# 排除网址列表文件
+links.txt
 # 不排除.gitignore和App.class:
 !.gitignore
 !App.class
