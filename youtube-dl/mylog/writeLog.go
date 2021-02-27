@@ -1,0 +1,30 @@
+package mylog
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+func checkFileIsExist(filename string) bool {
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		os.Create(filename)
+		return false
+	}
+	return true
+}
+func Logof(str string) {
+	filePath := "log.txt"
+	checkFileIsExist(filePath)
+	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Println("文件打开失败", err)
+	}
+	//及时关闭file句柄
+	defer file.Close()
+
+	//写入文件时，使用带缓存的 *Writer
+	write := bufio.NewWriter(file)
+	write.WriteString(str)
+	//Flush将缓存的文件真正写入到文件中
+	write.Flush()
+}

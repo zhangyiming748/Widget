@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"strings"
 	"sync"
+	"youtube-dl/mylog"
 )
 
 //youtube-dl -o "~/Desktop/%(title)s.%(ext)s" 'youtube file url'
@@ -41,16 +42,17 @@ func RunCmd(url string, wg *sync.WaitGroup, i int) {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		fmt.Printf("输出:%s\n",fn,string(tmp))
+		fmt.Printf("输出:%s\n",string(tmp))
 		if err != nil {
 			break
 		}
 	}
-
 	if err = cmd.Wait(); err != nil {
-		fmt.Printf("\n命令运行期间产生的错误:%v\t对应文件:%v\n",err,fn)
+		ret:=fmt.Sprintf("命令运行期间产生的错误:%v\t对应文件:%v\n",err,fn)
+		mylog.Logof(ret)
 	}
-	fmt.Printf("下载文件%v完成\n",fn)
+	ret:=fmt.Sprintf("下载文件%v完成\n",fn)
+	mylog.Logof(ret)
 	wg.Done()
 }
 func split(s string)string  {
