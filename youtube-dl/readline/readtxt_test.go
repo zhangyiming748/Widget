@@ -6,7 +6,7 @@ import (
 )
 
 func TestReadlink(t *testing.T) {
-	fp:="/Users/zen/Github/Tools/youtube-dl/links.txt"
-	ln:=Readlink(fp)
+	fp := "/Users/zen/Github/Widget/youtube-dl/links.txt"
+	ln := Readlink(fp)
 	log.Println(ln)
 }

@@ -1,6 +1,5 @@
 package main
 
-
 import (
 	"fmt"
 	"sync"
@@ -15,7 +14,7 @@ func main() {
 	for i, v := range links {
 		wg.Add(1)
 		fmt.Printf("开始尝试下载NO.%d\n", i)
-		go cmd.Ytd(v, &wg, i)
+		go cmd.RunCommand(v, &wg, i)
 	}
 	wg.Wait()
 }
