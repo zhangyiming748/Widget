@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 )
+
 func checkFileIsExist(filename string) bool {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
 		os.Create(filename)

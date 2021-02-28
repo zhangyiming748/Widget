@@ -1,4 +1,4 @@
-package cmd
+package downloadcmd
 
 import (
 	"log"
@@ -17,6 +17,6 @@ func TestYtd(t *testing.T) {
 
 func TestSplit(t *testing.T) {
 	link := ""
-	ret:=split(link)
+	ret := split(link)
 	log.Println(ret)
 }

@@ -9,7 +9,7 @@ func TestLogof(t *testing.T) {
 func BenchmarkLogof(b *testing.B) {
 	var str = "测试1\n测试2\n"
 	b.ResetTimer()
-	for i:=0;i<b.N;i++{
+	for i := 0; i < b.N; i++ {
 		Logof(str)
 	}
 	b.StopTimer()
