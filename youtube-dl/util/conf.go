@@ -3,6 +3,7 @@ package util
 import (
 	"fmt"
 	"github.com/widuu/goini"
+	"log"
 )
 
 const confPath = "./conf.ini"
@@ -26,9 +27,9 @@ func init() {
 
 func initConfig() {
 	conf = goini.SetConfig(confPath)
-	Infoln(confPath)
-	RunMode = conf.GetValue("runmode", "mode")
-	fmt.Println("init get runMode",RunMode)
+	log.Println(confPath)
+	RunMode = conf.GetValue("os", "macOS")
+	fmt.Println("init default ip is ",RunMode)
 }
 
 /**
