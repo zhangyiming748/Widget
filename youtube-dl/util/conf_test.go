@@ -6,6 +6,6 @@ import (
 )
 
 func TestGetVal(t *testing.T) {
-	os:=GetVal("os","macOS")
+	os := GetVal("os", "macOS")
 	log.Println(os)
 }
