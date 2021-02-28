@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-
 func GetExcPath() string {
 	file, _ := exec.LookPath(os.Args[0])
 	// 获取包含可执行文件名称的路径
@@ -17,4 +16,3 @@ func GetExcPath() string {
 	ret := path[:index]
 	return strings.Replace(ret, "\\", "/", -1)
 }
-

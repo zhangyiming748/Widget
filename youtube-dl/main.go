@@ -17,11 +17,11 @@ const (
 
 func main() {
 	var fp string
-	if fp=util.GetArgs();fp==""{
-		fp=list
+	if fp = util.GetArgs(); fp == "" {
+		fp = list
 	}
-	proxy:=util.DetectOS()
-	path:=util.GetExcPath()
+	proxy := util.DetectOS()
+	path := util.GetExcPath()
 	tn := timeNow.DateNowFormatStr()
 	mylog.Logof(tn)
 	mylog.Logof("\n")
@@ -30,7 +30,7 @@ func main() {
 	for i, v := range links {
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg,proxy,path)
+		go downloadcmd.RunCmd(v, &wg, proxy, path)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()

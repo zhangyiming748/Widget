@@ -11,8 +11,8 @@ func GetArgs() string {
 		return ""
 	}
 	if l == 2 {
-		log.Printf("参数%v",os.Args[1])
+		log.Printf("参数%v", os.Args[1])
 		return os.Args[l-1]
 	}
-		return ""
+	return ""
 }

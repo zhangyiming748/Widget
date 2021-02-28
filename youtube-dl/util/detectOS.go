@@ -1,13 +1,12 @@
 package util
 
 import (
-
 	"runtime"
 )
 
 //探测当前操作系统
 
-func DetectOS() string{
+func DetectOS() string {
 	arch := runtime.GOARCH
 
 	goos := runtime.GOOS
