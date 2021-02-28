@@ -1,7 +1,6 @@
 package downloadcmd
 
 import (
-	"bytes"
 	"fmt"
 	"log"
 	"os/exec"
@@ -12,22 +11,23 @@ import (
 )
 
 //youtube-dl -o "~/Desktop/%(title)s.%(ext)s" 'youtube file url'
-func RunCommand(url string, wg *sync.WaitGroup, i int) {
-	cmd := exec.Command("youtube-dl", "--proxy", "127.0.0.1:8889", "-o", "/Users/zen/Downloads/trans/%(title)s.%(ext)s", "-f", "best", url)
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-	err := cmd.Run()
-	if err != nil {
-		log.Fatalf("cmd.Run() failed with %s\n", err)
-	}
-	//outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
-	//fmt.Printf("Str:\n%s\nerr:\n%s\n", outStr, errStr)
-	fmt.Printf("下载NO.%d完成\n", i)
-	wg.Done()
-}
-func RunCmd(url string, wg *sync.WaitGroup) {
-	cmd := exec.Command("youtube-dl", "--proxy", "127.0.0.1:8889", "-o", "/Users/zen/Downloads/trans/%(title)s.%(ext)s", "-f", "best", url)
+//func RunCommand(url string, wg *sync.WaitGroup, i int) {
+//	cmd := exec.Command("youtube-dl", "--proxy", "127.0.0.1:8889", "-o", "/Users/zen/Downloads/trans/%(title)s.%(ext)s", "-f", "best", url)
+//	var stdout, stderr bytes.Buffer
+//	cmd.Stdout = &stdout
+//	cmd.Stderr = &stderr
+//	err := cmd.Run()
+//	if err != nil {
+//		log.Fatalf("cmd.Run() failed with %s\n", err)
+//	}
+//	//outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
+//	//fmt.Printf("Str:\n%s\nerr:\n%s\n", outStr, errStr)
+//	fmt.Printf("下载NO.%d完成\n", i)
+//	wg.Done()
+//}
+func RunCmd(url string, wg *sync.WaitGroup,proxy ,dir string) {
+	path:=strings.Join([]string{dir,"%(title)s.%(ext)s"},"/")
+	cmd := exec.Command("youtube-dl", "--proxy", proxy, "-o", path, "-f", "best", url)
 	// 命令的错误输出和标准输出都连接到同一个管道
 	stdout, err := cmd.StdoutPipe()
 	cmd.Stderr = cmd.Stdout
@@ -54,7 +54,7 @@ func RunCmd(url string, wg *sync.WaitGroup) {
 		log.Printf("重试下载%v\n", fn)
 		wg.Add(1)
 		time.Sleep(3 * time.Second)
-		go RunCmd(url, wg)
+		go RunCmd(url, wg,proxy,dir)
 	}
 	ret := fmt.Sprintf("下载文件%v完成\n", fn)
 	mylog.Logof(ret)
