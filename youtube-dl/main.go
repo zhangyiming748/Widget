@@ -8,10 +8,20 @@ import (
 	"youtube-dl/mylog"
 	"youtube-dl/readline"
 	"youtube-dl/timeNow"
+	"youtube-dl/util"
+)
+
+const (
+	list = "links.txt"
 )
 
 func main() {
-	fp := "links.txt"
+	var fp string
+	if fp=util.GetArgs();fp==""{
+		fp=list
+	}
+	proxy:=util.DetectOS()
+	path:=util.GetExcPath()
 	tn := timeNow.DateNowFormatStr()
 	mylog.Logof(tn)
 	mylog.Logof("\n")
@@ -20,7 +30,7 @@ func main() {
 	for i, v := range links {
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg)
+		go downloadcmd.RunCmd(v, &wg,proxy,path)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()

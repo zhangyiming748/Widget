@@ -1,4 +1,4 @@
-package getArgs
+package util
 
 import (
 	"log"

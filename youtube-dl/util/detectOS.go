@@ -14,19 +14,19 @@ func DetectOS() string{
 
 	if arch == "arm" || goos == "linux" {
 		//树莓派
-		return "Raspbian"
+		return "192.168.1.7:8889"
 	}
 	if arch == "amd64" || goos == "darwin" {
 		//苹果
-		return "macOS"
+		return "127.0.0.1:8889"
 	}
 	if arch == "amd64" || goos == "windows" {
 		//Windows
-		return "windows"
+		return "192.168.1.7:8889"
 	}
 	if arch == "amd64" || goos == "linux" {
 		//ubuntu
-		return "ubuntu"
+		return "192.168.1.7:8889"
 	}
 	return ""
 }
