@@ -28,7 +28,7 @@ func init() {
 func initConfig() {
 	conf = goini.SetConfig(confPath)
 	log.Println(confPath)
-	RunMode = conf.GetValue("os", "macOS")
+	RunMode = conf.GetValue("os", "windows")
 	fmt.Println("init default ip is ",RunMode)
 }
 
