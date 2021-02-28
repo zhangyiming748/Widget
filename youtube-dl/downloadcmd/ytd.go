@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"strings"
 	"sync"
+	"time"
 	"youtube-dl/mylog"
 )
 
@@ -52,6 +53,7 @@ func RunCmd(url string, wg *sync.WaitGroup) {
 		mylog.Logof(ret)
 		log.Printf("重试下载%v\n",fn)
 		wg.Add(1)
+		time.Sleep(3*time.Second)
 		go RunCmd(url,wg)
 	}
 	ret := fmt.Sprintf("下载文件%v完成\n", fn)
