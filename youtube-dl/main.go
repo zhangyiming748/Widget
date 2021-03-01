@@ -16,24 +16,24 @@ import (
 
 func main() {
 	var (
-		fp string
-		addr string
-		port string
+		fp     string
+		addr   string
+		port   string
 		target string
 	)
-	if fp = GetVal("links","path"); fp == "no value" {
+	if fp = GetVal("links", "path"); fp == "no value" {
 		panic(errors.New("没有找到待下载文件列表"))
 	}
-	if addr=GetVal("proxy","address");addr =="no value"{
+	if addr = GetVal("proxy", "address"); addr == "no value" {
 		panic(errors.New("没有有效的IP地址"))
 	}
-	if port=GetVal("proxy","port");port =="no value"{
+	if port = GetVal("proxy", "port"); port == "no value" {
 		panic(errors.New("没有有效的端口"))
 	}
-	if target=GetVal("target","fp");addr =="no value"{
+	if target = GetVal("target", "fp"); addr == "no value" {
 		panic(errors.New("没有有效目标文件夹"))
 	}
-	proxy:=strings.Join([]string{addr,port},":")
+	proxy := strings.Join([]string{addr, port}, ":")
 	fmt.Println(proxy)
 	tn := timeNow.DateNowFormatStr()
 	ti := time.Now()
@@ -48,9 +48,9 @@ func main() {
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
-	tj:=time.Now()
+	tj := time.Now()
 	mylog.Logof(ta)
 	mylog.Logof("\n")
-	sub:=tj.Sub(ti)
-	log.Printf("下载完成!\t用时%v\n",sub)
+	sub := tj.Sub(ti)
+	log.Printf("下载完成!\t用时%v\n", sub)
 }
