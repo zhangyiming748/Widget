@@ -1,27 +1,47 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"log"
 	"os"
+	"strings"
 	"sync"
 	"youtube-dl/downloadcmd"
 	"youtube-dl/mylog"
 	"youtube-dl/readline"
 	"youtube-dl/timeNow"
-	"youtube-dl/util"
+	. "youtube-dl/util"
 )
 
-const (
-	list = "links.txt"
-)
+
+
 
 func main() {
-	var fp string
-	if fp = util.GetArgs(); fp == "" {
-		fp = list
+	var (
+		fp string
+		addr string
+		port string
+		target string
+	)
+	//fp=GetVal("proxy","port")
+	if fp = GetVal("links","path"); fp == "no value" {
+		panic(errors.New("没有找到待下载文件列表"))
 	}
-	proxy := util.DetectOS()
-	path := util.GetExcPath()
+	if addr=GetVal("proxy","address");addr =="no value"{
+		panic(errors.New("没有有效的IP地址"))
+	}
+	if port=GetVal("proxy","port");port =="no value"{
+		panic(errors.New("没有有效的端口"))
+	}
+	if target=GetVal("target","fp");addr =="no value"{
+		panic(errors.New("没有有效目标文件夹"))
+	}
+	proxy:=strings.Join([]string{addr,port},":")
+	fmt.Println(proxy)
+	//proxy := DetectOS()
+
+	//path := GetExcPath()
 	tn := timeNow.DateNowFormatStr()
 	mylog.Logof(tn)
 	mylog.Logof("\n")
@@ -30,7 +50,7 @@ func main() {
 	for i, v := range links {
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg, proxy, path)
+		go downloadcmd.RunCmd(v, &wg, proxy, target)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
