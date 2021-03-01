@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"os"
 	"strings"
 	"sync"
 	"time"
@@ -22,7 +21,6 @@ func main() {
 		port string
 		target string
 	)
-	//fp=GetVal("proxy","port")
 	if fp = GetVal("links","path"); fp == "no value" {
 		panic(errors.New("没有找到待下载文件列表"))
 	}
@@ -37,9 +35,6 @@ func main() {
 	}
 	proxy:=strings.Join([]string{addr,port},":")
 	fmt.Println(proxy)
-	//proxy := DetectOS()
-
-	//path := GetExcPath()
 	tn := timeNow.DateNowFormatStr()
 	ti := time.Now()
 	mylog.Logof(tn)
@@ -58,11 +53,4 @@ func main() {
 	mylog.Logof("\n")
 	sub:=tj.Sub(ti)
 	log.Printf("下载完成!\t用时%v\n",sub)
-}
-func deleteFileIsExist(filename string) bool {
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		os.Remove(filename)
-		return false
-	}
-	return true
 }
