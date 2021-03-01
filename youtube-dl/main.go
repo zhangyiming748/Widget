@@ -7,15 +7,13 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"time"
 	"youtube-dl/downloadcmd"
 	"youtube-dl/mylog"
 	"youtube-dl/readline"
 	"youtube-dl/timeNow"
 	. "youtube-dl/util"
 )
-
-
-
 
 func main() {
 	var (
@@ -43,6 +41,7 @@ func main() {
 
 	//path := GetExcPath()
 	tn := timeNow.DateNowFormatStr()
+	ti := time.Now()
 	mylog.Logof(tn)
 	mylog.Logof("\n")
 	var wg sync.WaitGroup
@@ -54,8 +53,11 @@ func main() {
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
+	tj:=time.Now()
 	mylog.Logof(ta)
 	mylog.Logof("\n")
+	sub:=tj.Sub(ti)
+	log.Printf("下载完成!\t用时%v\n",sub)
 }
 func deleteFileIsExist(filename string) bool {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
