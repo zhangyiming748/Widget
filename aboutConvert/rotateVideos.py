@@ -27,15 +27,15 @@ def rotateCommand(Source, Target, file):
     print("tag: ", absTarget)
     # ffmpeg -i $file -vf "transpose=1" $file".mp4"
     prefix = 'ffmpeg -i '
-    suffix = ' -vf "transpose=2"  -c copy '
+    suffix = ' -vf "transpose=1" '
     command = prefix + '\"' + absSource + '\"' + suffix + '\"' + absTarget + '\"'
     print("转换的命令: %s" % command)
     os.system(command)
 
 
 if __name__ == '__main__':
-    Source = '/Users/zen/Downloads/Downie'
-    Target = '/Users/zen/Downloads/Downie/Done'
+    Source = '/Users/zen/Downloads/left'
+    Target = '/Users/zen/Downloads/left/Done'
     relativeFiles = get_dir(Source)
     total = len(relativeFiles)
     print("共有 %d 个文件" % total)
