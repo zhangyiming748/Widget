@@ -52,5 +52,6 @@ func main() {
 	mylog.Logof(ta)
 	mylog.Logof("\n")
 	sub := tj.Sub(ti)
+
 	log.Printf("下载完成!\t用时%v\n", sub)
 }
