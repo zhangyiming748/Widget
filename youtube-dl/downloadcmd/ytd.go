@@ -48,7 +48,7 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string) {
 		}
 	}
 	if err = cmd.Wait(); err != nil {
-		ret := fmt.Sprintf("命令运行期间产生的错误:%v\t对应文件:%v\n", err, fn)
+		ret := fmt.Sprintf("命令运行期间产生的错误:%v\t对应文件:%v\n", err, url)
 		mylog.Logof(ret)
 		//log.Printf("重试下载%v\n", fn)
 		//wg.Add(1)
