@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"runtime"
 	"strings"
 	"sync"
 	"time"
@@ -11,7 +12,7 @@ import (
 	"youtube-dl/mylog"
 	"youtube-dl/readline"
 	"youtube-dl/timeNow"
-	. "youtube-dl/util"
+	"youtube-dl/util"
 )
 
 func main() {
@@ -21,16 +22,19 @@ func main() {
 		port   string
 		target string
 	)
-	if fp = GetVal("links", "path"); fp == "no value" {
+	if ok:=isWindows();ok{
+		panic(errors.New("forbid os"))
+	}
+	if fp = util.GetVal("links", "path"); fp == "no value" {
 		panic(errors.New("没有找到待下载文件列表"))
 	}
-	if addr = GetVal("proxy", "address"); addr == "no value" {
+	if addr = util.GetVal("proxy", "address"); addr == "" {
 		panic(errors.New("没有有效的IP地址"))
 	}
-	if port = GetVal("proxy", "port"); port == "no value" {
+	if port = util.GetVal("proxy", "port"); port == "" {
 		panic(errors.New("没有有效的端口"))
 	}
-	if target = GetVal("target", "fp"); addr == "no value" {
+	if target = util.GetVal("target", "fp"); target == "" {
 		panic(errors.New("没有有效目标文件夹"))
 	}
 	proxy := strings.Join([]string{addr, port}, ":")
@@ -53,4 +57,14 @@ func main() {
 	mylog.Logof("\n")
 	sub := tj.Sub(ti)
 	log.Printf("下载完成!\t用时%v\n", sub)
+}
+func isWindows()bool  {
+	arch := runtime.GOARCH
+	goos := runtime.GOOS
+	if arch == "amd64" && goos == "windows" {
+		//Windows
+		log.Fatal("不能在Windows系统中运行,可以尝试在Windows中开启WSL")
+		return true
+	}
+	return false
 }
