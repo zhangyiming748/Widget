@@ -7,3 +7,5 @@ links.txt
 # 不排除.gitignore和App.class:
 !.gitignore
 !App.class
+# 忽略youtube-dl下的文件夹
+yotube_dl/venv/*
