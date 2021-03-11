@@ -42,7 +42,7 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string) {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		log.Printf("输出:%s\n", string(tmp))
+		log.Printf("输出:%s", string(tmp))
 		if err != nil {
 			break
 		}
