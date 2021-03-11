@@ -22,10 +22,10 @@ func main() {
 		port   string
 		target string
 	)
-	if ok:=isWindows();ok{
-		panic(errors.New("forbid os"))
+	if ok := isWindows(); ok {
+		panic(errors.New("不兼容的操作系统"))
 	}
-	if fp = util.GetVal("links", "path"); fp == "no value" {
+	if fp = util.GetVal("links", "path"); fp == "" {
 		panic(errors.New("没有找到待下载文件列表"))
 	}
 	if addr = util.GetVal("proxy", "address"); addr == "" {
@@ -48,7 +48,7 @@ func main() {
 	for i, v := range links {
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg, proxy, target)
+		go downloadcmd.RunCmd(v, &wg, proxy, target,i)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
@@ -58,7 +58,7 @@ func main() {
 	sub := tj.Sub(ti)
 	log.Printf("下载完成!\t用时%v\n", sub)
 }
-func isWindows()bool  {
+func isWindows() bool {
 	arch := runtime.GOARCH
 	goos := runtime.GOOS
 	if arch == "amd64" && goos == "windows" {
