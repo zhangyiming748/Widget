@@ -22,6 +22,11 @@ func main() {
 		port   string
 		target string
 	)
+	defer func() {
+		if err := recover(); err != nil {
+			log.Printf("程序运行过程中产生的错误:%v", err)
+		}
+	}()
 	if ok := isWindows(); ok {
 		panic(errors.New("不兼容的操作系统"))
 	}
@@ -29,7 +34,7 @@ func main() {
 		panic(errors.New("没有找到待下载文件列表"))
 	}
 	if addr = util.GetVal("proxy", "address"); addr == "" {
-		panic(errors.New("没有有效的IP地址"))
+		panic(errors.New("没有有效的ip"))
 	}
 	if port = util.GetVal("proxy", "port"); port == "" {
 		panic(errors.New("没有有效的端口"))
@@ -48,7 +53,7 @@ func main() {
 	for i, v := range links {
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg, proxy, target,i)
+		go downloadcmd.RunCmd(v, &wg, proxy, target, i)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
