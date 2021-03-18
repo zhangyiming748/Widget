@@ -66,7 +66,7 @@ func main() {
 func isWindows() bool {
 	arch := runtime.GOARCH
 	goos := runtime.GOOS
-	if arch == "amd64" && goos == "windows" {
+	if arch == "amd64" && goos == "windows" || arch == "386" && goos == "windows" {
 		//Windows
 		log.Fatal("不能在Windows系统中运行,可以尝试在Windows中开启WSL")
 		return true
