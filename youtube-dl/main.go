@@ -15,9 +15,11 @@ import (
 	"youtube-dl/timeNow"
 	"youtube-dl/util"
 )
+
 var (
 	MaxGoroutine = util.GetVal("goroutine", "num")
 )
+
 func main() {
 	var (
 		fp     string
@@ -45,6 +47,10 @@ func main() {
 	if target = util.GetVal("target", "fp"); target == "" {
 		panic(errors.New("没有有效目标文件夹"))
 	}
+	if MaxGoroutine == "no value" || MaxGoroutine == "" {
+		MaxGoroutine = "1"
+		log.Println("没有定义最大连接数,默认为单线程")
+	}
 	proxy := strings.Join([]string{addr, port}, ":")
 	fmt.Println(proxy)
 	tn := timeNow.DateNowFormatStr()
@@ -59,7 +65,7 @@ func main() {
 		ch <- struct{}{}
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg, proxy, target, i,ch)
+		go downloadcmd.RunCmd(v, &wg, proxy, target, i, ch)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()

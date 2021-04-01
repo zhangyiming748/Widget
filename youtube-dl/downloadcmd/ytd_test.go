@@ -19,7 +19,7 @@ func TestYtd(t *testing.T) {
 }
 
 func RunCommand(link string, s *sync.WaitGroup, i int) {
-	
+
 }
 
 func TestSplit(t *testing.T) {
@@ -28,10 +28,10 @@ func TestSplit(t *testing.T) {
 	log.Println(ret)
 }
 func TestJust(t *testing.T) {
-	i:=1
-	s:=fmt.Sprintf("第%d个管道返回:\t",i)
+	i := 1
+	s := fmt.Sprintf("第%d个管道返回:\t", i)
 	t.Log(s)
-	ch:=strings.Join([]string{"ch",strconv.Itoa(i)},"")
-	t.Log("ch=",ch)
+	ch := strings.Join([]string{"ch", strconv.Itoa(i)}, "")
+	t.Log("ch=", ch)
 
 }

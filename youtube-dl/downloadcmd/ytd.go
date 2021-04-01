@@ -9,8 +9,7 @@ import (
 	"youtube-dl/mylog"
 )
 
-
-func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string,i int,ch chan struct{}) {
+func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan struct{}) {
 	path := strings.Join([]string{dir, "%(title)s.%(ext)s"}, "/")
 	cmd := exec.Command("youtube-dl", "--proxy", proxy, "-o", path, "-f", "best", url)
 	// 命令的错误输出和标准输出都连接到同一个管道
@@ -28,7 +27,7 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string,i int,ch chan stru
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		log.Printf("第%d个文件输出:%s",i, string(tmp))
+		log.Printf("第%d个文件输出:%s", i, string(tmp))
 		if err != nil {
 			break
 		}
