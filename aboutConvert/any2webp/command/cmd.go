@@ -14,7 +14,7 @@ import (
 func ToWebp(fp string, wg *sync.WaitGroup, i int, ch chan struct{}) {
 	path := strings.Split(fp, ".")
 	target := strings.Join([]string{path[0], "webp"}, ".")
-	cmd := exec.Command("cwebp", "-lossless", "-z", "9", "-mt", "-sharp_yuv", "-v", fp, "-o", target)
+	cmd := exec.Command("cwebp", "-lossless", "-v", fp, "-o", target)
 	//命令的错误输出和标准输出都连接到同一个管道
 	stdout, err := cmd.StdoutPipe()
 	cmd.Stderr = cmd.Stdout
@@ -43,8 +43,8 @@ func ToWebp(fp string, wg *sync.WaitGroup, i int, ch chan struct{}) {
 }
 func WebpTo(fp string, wg *sync.WaitGroup, i int, ch chan struct{}) {
 	path := strings.Split(fp, ".")
-	target := strings.Join([]string{path[0], "webp"}, ".")
-	cmd := exec.Command("cwebp", "-lossless", "-z", "9", "-mt", "-sharp_yuv", "-v", fp, "-o", target)
+	target := strings.Join([]string{path[0], "jpg"}, ".")
+	cmd := exec.Command("dwebp", "-v", fp, "-o", target)
 	//命令的错误输出和标准输出都连接到同一个管道
 	stdout, err := cmd.StdoutPipe()
 	cmd.Stderr = cmd.Stdout
