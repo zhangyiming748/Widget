@@ -16,6 +16,7 @@ func main() {
 	fmt.Println(files)
 	var wg sync.WaitGroup
 	for i, f := range files {
+		ch <- struct{}{}
 		wg.Add(1)
 		go command.RunCmd(f, &wg, i, ch)
 	}
