@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"runtime"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -14,7 +15,9 @@ import (
 	"youtube-dl/timeNow"
 	"youtube-dl/util"
 )
-
+var (
+	MaxGoroutine = util.GetVal("goroutine", "num")
+)
 func main() {
 	var (
 		fp     string
@@ -49,11 +52,14 @@ func main() {
 	mylog.Logof(tn)
 	mylog.Logof("\n")
 	var wg sync.WaitGroup
+	max, _ := strconv.Atoi(MaxGoroutine)
+	ch := make(chan struct{}, max)
 	links := readline.Readlink(fp)
 	for i, v := range links {
+		ch <- struct{}{}
 		wg.Add(1)
 		log.Printf("开始尝试下载NO.%d\n", i)
-		go downloadcmd.RunCmd(v, &wg, proxy, target, i)
+		go downloadcmd.RunCmd(v, &wg, proxy, target, i,ch)
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
