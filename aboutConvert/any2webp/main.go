@@ -24,7 +24,7 @@ func main() {
 	}()
 	files := util.GetFiles()
 	max, _ := strconv.Atoi(MaxGoroutine)
-	ch := make(chan struct{}, maxz)
+	ch := make(chan struct{}, max)
 	fmt.Println(files)
 	var wg sync.WaitGroup
 	for i, f := range files {
