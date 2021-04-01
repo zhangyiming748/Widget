@@ -9,7 +9,7 @@ func TestYtd(t *testing.T) {
 	var wg sync.WaitGroup
 
 	wg.Add(1)
-	ToWebp("/Users/zen/Github/Widget/aboutConvert/any2webp/nier.jpg", &wg, 1)
+	//ToWebp("/Users/zen/Github/Widget/aboutConvert/any2webp/nier.jpg", &wg, 1)
 	wg.Wait()
 
 }
