@@ -11,10 +11,10 @@ import (
 	"sync"
 )
 
-func RunCmd(fp string, wg *sync.WaitGroup, i int) {
+func RunCmd(fp string, wg *sync.WaitGroup, i int, ch chan struct{}) {
 	path := strings.Split(fp, ".")
 	target := strings.Join([]string{path[0], "webp"}, ".")
-	cmd := exec.Command("cwebp", "-lossless","-z","9","-mt","-sharp_yuv","-v",fp, "-o", target)
+	cmd := exec.Command("cwebp", "-lossless", "-z", "9", "-mt", "-sharp_yuv", "-v", fp, "-o", target)
 	//命令的错误输出和标准输出都连接到同一个管道
 	stdout, err := cmd.StdoutPipe()
 	cmd.Stderr = cmd.Stdout
@@ -38,6 +38,6 @@ func RunCmd(fp string, wg *sync.WaitGroup, i int) {
 	if err = cmd.Wait(); err != nil {
 		log.Printf("命令运行期间产生的错误")
 	}
-
+	<-ch
 	wg.Done()
 }
