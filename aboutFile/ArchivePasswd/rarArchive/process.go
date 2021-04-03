@@ -2,17 +2,21 @@ package rarArchive
 
 import (
 	"fmt"
+	"log"
 	"os/exec"
 )
 
 func UnRar(rarpath string, pass string) {
 	cmd := exec.Command("unrar", "e", "-p"+pass, rarpath) //解压到当前文件夹
-	fmt.Printf("密码不是%s",pass)
-	out, _ := cmd.Output()
-	fmt.Printf("输出的长度是%")
-	if len(out) == 203 { //len 203 为成功，每个人不同
-		fmt.Printf("password is : \"%s\" \n", pass)
-	}else {
-		fmt.Println("尝试下一组密码")
+	defer func() {
+		if err := recover(); err != nil {
+			log.Printf("运行中产生错误%v", err)
+		}
+	}()
+	if err := cmd.Run(); err != nil {
+		if err.Error() == "exit status 255" {
+			fmt.Printf("file : %s\tpassword is :%s\n",rarpath,pass)
+		}
+		//log.Printf("runcmd err:%v\n", err)
 	}
 }

@@ -12,7 +12,6 @@ var (
 )
 
 func main() {
-
 	var file string
 	if len(os.Args) == 2 {
 		file = os.Args[1]
@@ -25,5 +24,4 @@ func main() {
 	for _,ps:=range passwords{
 		rarArchive.UnRar(file,ps)
 	}
-
 }

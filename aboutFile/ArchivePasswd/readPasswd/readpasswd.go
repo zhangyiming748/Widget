@@ -23,7 +23,6 @@ func ReadPasswd2Slice(passwd string) []string {
 		}
 		//fmt.Println(string(a))
 		passwds = append(passwds, string(a))
-
 	}
 	return passwds
 }
