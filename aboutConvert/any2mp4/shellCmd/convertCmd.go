@@ -3,6 +3,7 @@ package shellCmd
 import (
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -36,7 +37,15 @@ func ToMp4(src, file string) {
 	if err = cmd.Wait(); err != nil {
 		log.Println("命令执行中有错误产生", err)
 	}
-
+	done(in)
+}
+func done(f string) {
+	err := os.Remove(f)
+	if err != nil {
+		log.Println("删除失败")
+	} else {
+		log.Println("删除成功")
+	}
 }
 func RightTo(src, dst, file string) {
 	in := strings.Join([]string{src, file}, "/")
