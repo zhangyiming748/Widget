@@ -2,56 +2,45 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"strconv"
 	"strings"
-	"time"
 )
 
 func main() {
 	var (
 		stime, etime string
 	)
-	fmt.Println("输入开始时间")
+	fmt.Println("输入开始时间,格式HHMMSS")
 	fmt.Scanf("%s", &stime)
-	fmt.Println("输入结束时间")
+	sh:=stime[0:2]
+	sm:=stime[2:4]
+	ss:=stime[4:]
+	s_sec:=toSec(sh,sm,ss)
+	fmt.Printf("开始时间:%v",strings.Join([]string{sh,sm,ss},":"))
+	fmt.Println("输入结束时间,格式HHMMSS")
 	fmt.Scanf("%s", &etime)
-	sec := subTime(stime, etime)
-	keeptime := makeHHMMSS(int(sec))
-	fmt.Printf("起始时间%v持续时间%v", stime, keeptime)
+	eh:=etime[0:2]
+	em:=etime[2:4]
+	es:=etime[4:]
+	e_sec:=toSec(eh,em,es)
+	t:=e_sec-s_sec
+	fmt.Printf("持续时间:%v",strings.Join([]string{eh,em,es},":"))
+
+
 }
-
-/*
-将输出的秒转换为hh:mm:ss
-*/
-func makeHHMMSS(sec int) string {
-
-	hh := sec % 3600
-	sec = sec - 3600*hh
-	mm := sec % 60
-	sec = sec - 60*mm
-	ss := sec
-	stime := strings.Join([]string{string(hh), string(mm), string(ss)}, ":")
-	//fmt.Printf("持续时间%s\n", stime)
-	return stime
+func toSec(hh,mm,ss string)int  {
+	var sec int
+	h,_:=strconv.Atoi(hh)
+	m,_:=strconv.Atoi(mm)
+	s,_:=strconv.Atoi(ss)
+	sec=h*3600 +m*60+s
+	return sec
 }
-
-/*
-计算时间差，输出秒
-*/
-func subTime(start, end string) int64 {
-	timeLayout :="2006-01-02 03:04:05 PM"
-	loc, _ := time.LoadLocation("Local")
-	s_time, err := time.ParseInLocation(timeLayout, start, loc)
-	if err != nil {
-		log.Println("StringToTimeStamp出现异常：", err)
+func int2time(i int) string {
+	h:=i/3600
+	if h<10{
+		h="0"+string(h)
 	}
-	e_time, err := time.ParseInLocation(timeLayout, end, loc)
-	if err != nil {
-		log.Println("StringToTimeStamp出现异常：", err)
-	}
-
-	start_time := s_time.Unix()
-	end_time := e_time.Unix()
-	t := end_time - start_time
-	return t
+	t:= strings.Join([]string{string(),string(),string()},":")
+	return ""
 }
