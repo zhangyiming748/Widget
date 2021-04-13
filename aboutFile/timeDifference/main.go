@@ -2,35 +2,43 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 )
 
 func main() {
-	var (
-		stime, etime string
-	)
-	fmt.Printf("输入开始时间,格式HHMMSS\n")
-	fmt.Scanf("%s", &stime)
+	if err:=recover();err!=nil{
+		fmt.Println(err)
+	}
+	if len(os.Args)<3{
+		panic("输入开始和结束时间")
+	}
+	stime := os.Args[1]
+	etime := os.Args[2]
+	//fmt.Printf("参数1:%v\t参数2:%v\n", v1, v2)
+
+	//fmt.Printf("输入开始时间,格式HHMMSS\n")
+	//fmt.Scanf("%s", &stime)
 	sh := stime[0:2]
 	sm := stime[2:4]
 	ss := stime[4:]
 	s_sec := toSec(sh, sm, ss)
-	hint,_:=strconv.Atoi(sh)
-	mint,_:=strconv.Atoi(sm)
-	sint,_:=strconv.Atoi(ss)
+	hint, _ := strconv.Atoi(sh)
+	mint, _ := strconv.Atoi(sm)
+	sint, _ := strconv.Atoi(ss)
 	//fmt.Printf("开始时间:%v\n", strings.Join([]string{sh, sm, ss}, ":"))
-	fmt.Printf("输入结束时间,格式HHMMSS\n")
-	fmt.Scanf("%s", &etime)
+	//fmt.Printf("输入结束时间,格式HHMMSS\n")
+	//fmt.Scanf("%s", &etime)
 	eh := etime[0:2]
 	em := etime[2:4]
 	es := etime[4:]
 	e_sec := toSec(eh, em, es)
 	t := e_sec - s_sec
-	kh,km,ks:=secTo(t)
+	kh, km, ks := secTo(t)
 	//h:=strconv.Itoa(sh)
 	//m:=strconv.Itoa(sm)
 	//s:=strconv.Itoa(ss)
-	fmt.Printf("ffmpeg -ss %02d:%02d:%02d -t %02d:%02d:%02d",hint,mint,sint, kh, km, ks)
+	fmt.Printf("ffmpeg -ss %02d:%02d:%02d -t %02d:%02d:%02d -i \n", hint, mint, sint, kh, km, ks)
 
 }
 func toSec(hh, mm, ss string) int {
