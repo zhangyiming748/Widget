@@ -14,6 +14,5 @@ func TestStr2(t *testing.T) {
 }
 func TestSecTo(t *testing.T) {
 	h, m, s := secTo(3662)
-
 	fmt.Printf("%02d:%02d:%02d", h, m, s)
 }
