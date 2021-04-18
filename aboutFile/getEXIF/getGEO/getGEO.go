@@ -12,16 +12,11 @@ import (
 func EXIF2GEO(fp string) string {
 	defer func() {
 		if err := recover(); err != nil {
-			fmt.Printf("recover:%v", err)
+			Debugln(err)
 		}
 	}()
-
-	//fname := "IMG4.jpg"
-
 	f, _ := os.Open(fp)
 	x, _ := exif.Decode(f)
-
-	//fmt.Printf("x:%v", x)
 	Longitude, _ := x.Get(exif.GPSLongitude)
 	Latitude, _ := x.Get(exif.GPSLatitude)
 	long := convert(Longitude)
@@ -43,5 +38,4 @@ func convert(tag *tiff.Tag) float64 {
 	s, _ := strconv.Atoi(ss)
 	ret := float64(h) + float64(m)/60 + float64(s)/1000000/3600
 	return ret
-	//116.36800384499999,39.91048431388889
 }
