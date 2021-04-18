@@ -17,12 +17,11 @@ func EXIF2GEO(fp string) string {
 	//}()
 	f, _ := os.Open(fp)
 	x, _ := exif.Decode(f)
-	fmt.Println(x)
+	//fmt.Println(x)
 	Longitude, _ := x.Get(exif.GPSLongitude)
 	Latitude, _ := x.Get(exif.GPSLatitude)
-	Debugln(Longitude)
-	Debugln(Latitude)
-
+	//Debugln(Longitude)
+	//Debugln(Latitude)
 	Long, err1 := strconv.ParseFloat(fmt.Sprintf("%v", Longitude), 64)
 	Lat, err2 := strconv.ParseFloat(fmt.Sprintf("%v", Latitude), 64)
 	if err1 == nil || err2 == nil {
