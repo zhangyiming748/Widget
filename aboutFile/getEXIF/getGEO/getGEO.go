@@ -43,9 +43,9 @@ func convert(tag *tiff.Tag) float64 {
 	hs := strings.Split(step5[0], "/")[0]
 	ms := strings.Split(step5[1], "/")[0]
 	ss := strings.Split(step5[2], "/")[0]
-	h, _ := strconv.Atoi(hs)
-	m, _ := strconv.Atoi(ms)
-	s, _ := strconv.Atoi(ss)
-	ret := float64(h) + float64(m)/60 + float64(s)/1000000/3600
+	h, _ := strconv.ParseFloat(hs,64)
+	m, _ := strconv.ParseFloat(ms,64)
+	s, _ := strconv.ParseFloat(ss,64)
+	ret := h + m/60 +s/1000000/3600
 	return ret
 }
