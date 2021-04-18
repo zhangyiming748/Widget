@@ -145,4 +145,3 @@ func PanicPosition() string {
 	s := fmt.Sprintf("%s +%d: ", file, line)
 	return s
 }
-
