@@ -11,8 +11,8 @@ import (
 func main() {
 	defer func() {
 		if err := recover(); err != nil {
-			v:=fmt.Sprint(err)
-			if v=="runtime error: invalid memory address or nil pointer dereference"{
+			v := fmt.Sprint(err)
+			if v == "runtime error: invalid memory address or nil pointer dereference" {
 				getGEO.Debugf("也许当前图片没有GEO信息")
 			}
 		}
