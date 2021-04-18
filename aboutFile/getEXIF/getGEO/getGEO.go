@@ -10,15 +10,25 @@ import (
 )
 
 func EXIF2GEO(fp string) string {
-	defer func() {
-		if err := recover(); err != nil {
-			Debugln(err)
-		}
-	}()
+	//defer func() {
+	//	if err := recover(); err != nil {
+	//		Debugln(err)
+	//	}
+	//}()
 	f, _ := os.Open(fp)
 	x, _ := exif.Decode(f)
+	//fmt.Println(x)
 	Longitude, _ := x.Get(exif.GPSLongitude)
 	Latitude, _ := x.Get(exif.GPSLatitude)
+	Debugln(Longitude)
+	Debugln(Latitude)
+
+	Long, err1 := strconv.ParseFloat(fmt.Sprintf("%v", Longitude), 64)
+	Lat, err2 := strconv.ParseFloat(fmt.Sprintf("%v", Latitude), 64)
+	if err1 == nil || err2 == nil {
+		ret := fmt.Sprintf("%f,%v", Long, Lat)
+		return ret
+	}
 	long := convert(Longitude)
 	lat := convert(Latitude)
 	ret := fmt.Sprintf("%f,%v", long, lat)
