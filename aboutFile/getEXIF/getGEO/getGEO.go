@@ -17,7 +17,7 @@ func EXIF2GEO(fp string) string {
 	//}()
 	f, _ := os.Open(fp)
 	x, _ := exif.Decode(f)
-	//fmt.Println(x)
+	fmt.Println(x)
 	Longitude, _ := x.Get(exif.GPSLongitude)
 	Latitude, _ := x.Get(exif.GPSLatitude)
 	Debugln(Longitude)
@@ -26,8 +26,11 @@ func EXIF2GEO(fp string) string {
 	Long, err1 := strconv.ParseFloat(fmt.Sprintf("%v", Longitude), 64)
 	Lat, err2 := strconv.ParseFloat(fmt.Sprintf("%v", Latitude), 64)
 	if err1 == nil || err2 == nil {
-		ret := fmt.Sprintf("%f,%v", Long, Lat)
-		return ret
+		if Long<180 ||Lat<90{
+			ret := fmt.Sprintf("%f,%v", Long, Lat)
+			return ret
+		}
+
 	}
 	long := convert(Longitude)
 	lat := convert(Latitude)
@@ -46,6 +49,7 @@ func convert(tag *tiff.Tag) float64 {
 	h, _ := strconv.ParseFloat(hs,64)
 	m, _ := strconv.ParseFloat(ms,64)
 	s, _ := strconv.ParseFloat(ss,64)
+	
 	ret := h + m/60 +s/1000000/3600
 	return ret
 }
