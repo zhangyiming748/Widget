@@ -1,4 +1,4 @@
-package getEXIF
+package decodeGEO
 
 import (
 	"github.com/beevik/etree"

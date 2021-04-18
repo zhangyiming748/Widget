@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func EXIF2GEO(fp string)string {
+func EXIF2GEO(fp string) string {
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Printf("recover:%v", err)
@@ -26,7 +26,7 @@ func EXIF2GEO(fp string)string {
 	Latitude, _ := x.Get(exif.GPSLatitude)
 	long := convert(Longitude)
 	lat := convert(Latitude)
-	ret:=fmt.Sprintf("%f,%v", long, lat)
+	ret := fmt.Sprintf("%f,%v", long, lat)
 	return ret
 }
 func convert(tag *tiff.Tag) float64 {
@@ -43,5 +43,5 @@ func convert(tag *tiff.Tag) float64 {
 	s, _ := strconv.Atoi(ss)
 	ret := float64(h) + float64(m)/60 + float64(s)/1000000/3600
 	return ret
-//116.36800384499999,39.91048431388889
+	//116.36800384499999,39.91048431388889
 }
