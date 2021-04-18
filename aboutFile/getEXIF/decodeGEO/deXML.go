@@ -1,10 +1,10 @@
-package main
+package getEXIF
 
 import (
 	"github.com/beevik/etree"
 )
 
-func DecodeXML(xml string)string {
+func DeXML(xml string) string {
 	// 初始化根节点
 	doc := etree.NewDocument()
 	if err := doc.ReadFromFile(xml); err != nil {
