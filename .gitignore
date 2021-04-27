@@ -9,3 +9,5 @@ links.txt
 !App.class
 # 忽略youtube-dl下的文件夹
 yotube_dl/venv/*
+# 忽略pycharm生成的venv
+venv
