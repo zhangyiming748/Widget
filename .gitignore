@@ -11,3 +11,7 @@ links.txt
 yotube_dl/venv/*
 # 忽略pycharm生成的venv
 venv
+# 忽略测试文件
+testFile
+# 忽略日志文件
+log.txt
