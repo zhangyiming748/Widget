@@ -3,9 +3,11 @@ package downloadcmd
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"os/exec"
 	"strings"
 	"sync"
+	"time"
 	"youtube-dl/mylog"
 )
 
@@ -42,6 +44,8 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan st
 	}
 	ret := fmt.Sprintf("下载文件%v完成\n", fn)
 	mylog.Logof(ret)
+	wait:=time.Duration(rand.Intn(3))
+	time.Sleep(wait*time.Second)
 	<-ch
 	wg.Done()
 }
