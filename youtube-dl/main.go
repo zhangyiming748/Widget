@@ -61,11 +61,17 @@ func main() {
 	max, _ := strconv.Atoi(MaxGoroutine)
 	ch := make(chan struct{}, max)
 	links := readline.Readlink(fp)
+	list:=make(map[string]bool)
 	for i, v := range links {
+		if list[v]==true{
+			log.Printf("跳过重复文件No.%d",i+1)
+			continue
+		}
 		ch <- struct{}{}
 		wg.Add(1)
-		log.Printf("开始尝试下载NO.%d\n", i)
+		log.Printf("开始尝试下载NO.%d\n", i+1)
 		go downloadcmd.RunCmd(v, &wg, proxy, target, i, ch)
+		list[v]=true
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
