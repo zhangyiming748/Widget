@@ -11,7 +11,7 @@ import (
 func LeftTo(src, dst, file string) {
 	in := strings.Join([]string{src, file}, "/")
 	out := strings.Join([]string{dst, file}, "/")
-	cmd := exec.Command("ffmpeg", "-threads","1","-i",in, "-vf", "transpose=1", "-threads","1",out)
+	cmd := exec.Command("ffmpeg", "-threads","2","-i",in, "-vf", "transpose=1", "-threads","2",out)
 	fmt.Printf("生成的命令是:%s", cmd)
 	// 命令的错误输出和标准输出都连接到同一个管道
 	stdout, err := cmd.StdoutPipe()
