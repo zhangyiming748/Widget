@@ -2,7 +2,6 @@ package downloadcmd
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"os/exec"
 	"strings"
@@ -29,7 +28,7 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan st
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		log.Printf("第%d个文件输出:%s", i, string(tmp))
+		//log.Printf("第%d个文件输出:%s", i, string(tmp))
 		if err != nil {
 			break
 		}
