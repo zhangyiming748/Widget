@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"log"
+	l "log"
+	"os"
 	"rotateVideos/shellCmd"
 	"rotateVideos/util"
 	"time"
@@ -10,6 +11,16 @@ import (
 /*
 目前只能正确处理不带空格的文件名
  */
+func init()  {
+	dst := util.GetVal("target", "dst")
+	if exists(dst)||isDir(dst){
+		l.Println("目标文件夹设置正确")
+	}else {
+		l.Println("新建目标文件夹")
+		os.Mkdir(dst,0777)
+	}
+
+}
 func main() {
 	start:=time.Now()
 	var (
@@ -34,5 +45,27 @@ func main() {
 	}
 	end:=time.Now()
 	take:=end.Sub(start)
-	log.Printf("处理%d个文件,共用时%v\n",len(files),take)
+	l.Printf("处理%d个文件,共用时%v\n",len(files),take)
 }
+// 判断所给路径文件/文件夹是否存在
+func exists(path string) bool {
+	_, err := os.Stat(path)    //os.Stat获取文件信息
+	if err != nil {
+		if os.IsExist(err) {
+			return true
+		}
+		return false
+	}
+	return true
+}
+
+// 判断所给路径是否为文件夹
+func isDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
+
