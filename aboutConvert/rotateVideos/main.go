@@ -19,7 +19,7 @@ func main() {
 		dst = util.GetVal("target", "dst")
 	)
 	files = util.GetFiles(src, util.GetVal("target", "pattern"))
-	fmt.Println(files)
+	fmt.Printf("符合条件的文件: %v\n",files)
 	param = util.GetVal("direction", "before")
 	if param == "left"{
 		for _,file:=range files{
