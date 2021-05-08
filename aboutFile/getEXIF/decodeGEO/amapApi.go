@@ -14,7 +14,7 @@ var (
 )
 
 func Decode(locat string) {
-	url := "https://restapi.amap.com/v3/geocode/regeo?output=xml&location=" + locat + "&key=" + key + "&radius=1000&extensions=all"
+	url := "https://restapi.amap.com/v3/geocode/regeo?output=json&location=" + locat + "&key=" + key + "&radius=1000&extensions=base"
 	response, err := http.Get(url)
 	if err != nil {
 		//...
@@ -24,7 +24,7 @@ func Decode(locat string) {
 	if err != nil {
 
 	}
-	//fmt.Println(string(body))
+	fmt.Println(string(body))
 	result(string(body))
 }
 func result(text string) {
