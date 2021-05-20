@@ -138,5 +138,5 @@ func Weather(adcode string) {
 	after_72_nightwind := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["nightwind"]
 	after_72_daypower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["daypower"]
 	after_72_nightpower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["nightpower"]
-	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C%v风%v级\n", after_72_date, after_72_week, after_72_dayweather, after_72_daytemp, after_72_daywind, after_72_daypower, after_72_nightweather , after_72_nighttemp,after_72_nightwind, after_72_nightpower)
+	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", after_72_date, after_72_week, after_72_dayweather, after_72_daytemp, after_72_daywind, after_72_daypower, after_72_nightweather , after_72_nighttemp,after_72_nightwind, after_72_nightpower)
 }
