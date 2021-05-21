@@ -13,7 +13,7 @@ func ToMp4(src, file string) {
 	fname := strings.Split(file, ".")[0]
 	fname = strings.Join([]string{fname, "mp4"}, ".")
 	out := strings.Join([]string{src, fname}, "/")
-	cmd := exec.Command("ffmpeg", "-i", in,"-c:v","copy", out)
+	cmd := exec.Command("ffmpeg", "-i", in, "-c:v", "copy", out)
 	fmt.Printf("生成的命令是:%s", cmd)
 	// 命令的错误输出和标准输出都连接到同一个管道
 	stdout, err := cmd.StdoutPipe()
