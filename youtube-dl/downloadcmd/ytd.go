@@ -1,14 +1,13 @@
 package downloadcmd
 
 import (
-	"fmt"
-	"log"
 	"math/rand"
 	"os/exec"
 	"strings"
 	"sync"
 	"time"
-	"youtube-dl/mylog"
+	"youtube-dl/convert"
+	. "youtube-dl/mylog"
 )
 
 func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan struct{}) {
@@ -18,39 +17,42 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan st
 	stdout, err := cmd.StdoutPipe()
 	cmd.Stderr = cmd.Stdout
 	if err != nil {
-		fmt.Printf("cmd.StdoutPipe产生的错误:%v", err)
+		Error.Printf("cmd.StdoutPipe产生的错误:%v", err)
 	}
 	if err = cmd.Start(); err != nil {
-		fmt.Printf("cmd.Run产生的错误:%v", err)
+		Error.Printf("cmd.Run产生的错误:%v", err)
 	}
-	fn := split(url)
+	//fn := split(url)
+	//fn := url
 	// 从管道中实时获取输出并打印到终端
 	for {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		log.Printf("第%d个文件输出:%s", i+1, string(tmp))
+		Debug.Printf("第%d个文件输出:%s", i+1, string(tmp))
 		if err != nil {
 			break
 		}
 	}
 	if err = cmd.Wait(); err != nil {
-		ret := fmt.Sprintf("命令运行期间产生的错误:%v\t对应文件:%v\n", err, url)
-		mylog.Logof(ret)
+		Error.Printf("%v对应文件:%v\n", err, url)
 		//log.Printf("重试下载%v\n", fn)
 		//wg.Add(1)
 		//time.Sleep(3 * time.Second)
 		//go RunCmd(url, wg, proxy, dir)
 	}
-	ret := fmt.Sprintf("下载文件%v完成\n", fn)
-	mylog.Logof(ret)
-	wait:=time.Duration(rand.Intn(3))
-	time.Sleep(wait*time.Second)
+	Info.Printf("下载文件%v完成\n", url)
+	if ext:=strings.Split(path,".")[1];ext=="m3u8"{
+		Debug.Printf("开始转换文件:%s",path)
+		convert.ToMp4(path)
+		Debug.Printf("转换完成文件:%s",path)
+	}
+	Debug.Println("当前文件处理结束")
+	wait := time.Duration(rand.Intn(3))
+	time.Sleep(wait * time.Second)
 	<-ch
 	wg.Done()
 }
-func split(s string) string {
-	strs := strings.Split(s, "/")
-	suffix := strs[len(strs)-1]
-	return suffix
+func getFormat(url string) {
+
 }

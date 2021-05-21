@@ -2,7 +2,6 @@ package downloadcmd
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 	"sync"
@@ -22,11 +21,11 @@ func RunCommand(link string, s *sync.WaitGroup, i int) {
 
 }
 
-func TestSplit(t *testing.T) {
-	link := ""
-	ret := split(link)
-	log.Println(ret)
-}
+//func TestSplit(t *testing.T) {
+//	link := ""
+//	ret := split(link)
+//	log.Println(ret)
+//}
 func TestJust(t *testing.T) {
 	i := 1
 	s := fmt.Sprintf("第%d个管道返回:\t", i)

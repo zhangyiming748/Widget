@@ -3,14 +3,13 @@ package main
 import (
 	"errors"
 	"fmt"
-	"log"
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 	"youtube-dl/downloadcmd"
-	"youtube-dl/mylog"
+	. "youtube-dl/mylog"
 	"youtube-dl/readline"
 	"youtube-dl/timeNow"
 	"youtube-dl/util"
@@ -29,7 +28,7 @@ func main() {
 	)
 	defer func() {
 		if err := recover(); err != nil {
-			log.Printf("程序运行过程中产生的错误:%v", err)
+			Debug.Printf("程序运行过程中产生的错误:%v", err)
 		}
 	}()
 	if ok := isWindows(); ok {
@@ -49,44 +48,44 @@ func main() {
 	}
 	if MaxGoroutine == "no value" || MaxGoroutine == "" {
 		MaxGoroutine = "1"
-		log.Println("没有定义最大连接数,默认为单线程")
+		Debug.Println("没有定义最大连接数,默认为单线程")
 	}
 	proxy := strings.Join([]string{addr, port}, ":")
 	fmt.Println(proxy)
 	tn := timeNow.DateNowFormatStr()
 	ti := time.Now()
-	mylog.Logof(tn)
-	mylog.Logof("\n")
+	Debug.Println(tn)
+	//Debug.Println("\n")
 	var wg sync.WaitGroup
 	max, _ := strconv.Atoi(MaxGoroutine)
 	ch := make(chan struct{}, max)
 	links := readline.Readlink(fp)
-	list:=make(map[string]bool)
+	list := make(map[string]bool)
 	for i, v := range links {
-		if list[v]==true{
-			log.Printf("跳过重复文件No.%d",i+1)
+		if list[v] == true {
+			Debug.Printf("跳过重复文件No.%d", i+1)
 			continue
 		}
 		ch <- struct{}{}
 		wg.Add(1)
-		log.Printf("开始尝试下载NO.%d\n", i+1)
+		Debug.Printf("开始尝试下载NO.%d\n", i+1)
 		go downloadcmd.RunCmd(v, &wg, proxy, target, i, ch)
-		list[v]=true
+		list[v] = true
 	}
 	wg.Wait()
 	ta := timeNow.DateNowFormatStr()
 	tj := time.Now()
-	mylog.Logof(ta)
-	mylog.Logof("\n")
+	Debug.Println(ta)
+	//mylog.Logof("\n")
 	sub := tj.Sub(ti)
-	log.Printf("下载完成!\t用时%v\n", sub)
+	Debug.Printf("下载完成!\t用时%v\n", sub)
 }
 func isWindows() bool {
 	arch := runtime.GOARCH
 	goos := runtime.GOOS
 	if arch == "amd64" && goos == "windows" || arch == "386" && goos == "windows" {
 		//Windows
-		log.Fatal("不能在Windows系统中运行,可以尝试在Windows中开启WSL")
+		Debug.Fatal("不能在Windows系统中运行,可以尝试在Windows中开启WSL")
 		return true
 	}
 	return false
