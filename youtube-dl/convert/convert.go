@@ -8,9 +8,9 @@ import (
 )
 
 func Convert(fullpath string) {
-
+	toMp4(fullpath)
 }
-func ToMp4(fullpath string) {
+func toMp4(fullpath string) {
 	out := strings.Join([]string{strings.Split(fullpath, ".")[0], "mp4"}, ".")
 	//in := strings.Split(fullpath, ".")
 	//fname := strings.Split(file, ".")[0]

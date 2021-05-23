@@ -1,3 +1,12 @@
+# github.com/thedevsaddam/gojsonq/v2 v2.5.2
+## explicit
+# github.com/tidwall/gjson v1.8.0
+## explicit
+github.com/tidwall/gjson
+# github.com/tidwall/match v1.0.3
+github.com/tidwall/match
+# github.com/tidwall/pretty v1.1.0
+github.com/tidwall/pretty
 # github.com/widuu/goini v0.0.0-20180603013956-56a38bd2e09b
 ## explicit
 github.com/widuu/goini
