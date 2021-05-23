@@ -15,11 +15,11 @@ var (
 func init() {
 	log.SetPrefix("youtube_dl: ")
 	log.SetFlags(log.Ltime | log.Lshortfile)
-	debuglog, err1 := os.OpenFile("debug.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	debuglog, err1 := os.OpenFile("debug.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err1 != nil {
 		log.Println("打开日志文件错误")
 	}
-	errorlog, err2 := os.OpenFile("error.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	errorlog, err2 := os.OpenFile("error.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err2 != nil {
 		log.Println(err2)
 	}

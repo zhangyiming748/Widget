@@ -21,14 +21,20 @@ var (
 )
 
 func init() {
-	if isExists("error.txt") {
-		if err := os.Remove("error.txt"); err != nil {
+	if isExists("error.log") {
+		if err := os.Remove("error.log"); err != nil {
 			Error.Println("初始化错误日志失败")
 		}
+		if _, err := os.Create("error.log"); err != nil {
+			Error.Println("创建空白错误日志失败")
+		}
 	}
-	if isExists("debug.txt") {
-		if err := os.Remove("debug.txt"); err != nil {
+	if isExists("debug.log") {
+		if err := os.Remove("debug.log"); err != nil {
 			Error.Println("初始化调试日志失败")
+		}
+		if _, err := os.Create("debug.log"); err != nil {
+			Error.Println("创建空白调试志失败")
 		}
 	}
 }
