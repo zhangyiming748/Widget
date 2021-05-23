@@ -14,7 +14,7 @@ venv
 # 忽略测试文件
 testFile
 # 忽略日志文件
-log.txt
+*.log
 # 忽略大文件
 *.mp4
 *.m3u8
