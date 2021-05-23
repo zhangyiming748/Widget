@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -19,6 +20,18 @@ var (
 	MaxGoroutine = util.GetVal("goroutine", "num")
 )
 
+func init() {
+	if isExists("error.txt") {
+		if err := os.Remove("error.txt"); err != nil {
+			Error.Println("初始化错误日志失败")
+		}
+	}
+	if isExists("debug.txt") {
+		if err := os.Remove("debug.txt"); err != nil {
+			Error.Println("初始化调试日志失败")
+		}
+	}
+}
 func main() {
 	var (
 		fp     string
@@ -76,7 +89,6 @@ func main() {
 	ta := timeNow.DateNowFormatStr()
 	tj := time.Now()
 	Debug.Println(ta)
-	//mylog.Logof("\n")
 	sub := tj.Sub(ti)
 	Debug.Printf("下载完成!\t用时%v\n", sub)
 }
@@ -89,4 +101,14 @@ func isWindows() bool {
 		return true
 	}
 	return false
+}
+func isExists(path string) bool {
+	_, err := os.Stat(path) //os.Stat获取文件信息
+	if err != nil {
+		if os.IsExist(err) {
+			return true
+		}
+		return false
+	}
+	return true
 }
