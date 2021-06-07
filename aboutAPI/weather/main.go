@@ -57,7 +57,7 @@ func Weather(adcode string) {
 	today_nightwind := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[0].(map[string]interface{})["nightwind"]
 	today_daypower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[0].(map[string]interface{})["daypower"]
 	today_nightpower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[0].(map[string]interface{})["nightpower"]
-	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", today_date, today_week, today_dayweather, today_daytemp, today_daywind, today_daypower, today_nightweather,today_nighttemp , today_nightwind, today_nightpower)
+	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", today_date, today_week, today_dayweather, today_daytemp, today_daywind, today_daypower, today_nightweather, today_nighttemp, today_nightwind, today_nightpower)
 	after_24_date := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[1].(map[string]interface{})["date"]
 	after_24_week := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[1].(map[string]interface{})["week"]
 	switch after_24_week {
@@ -111,7 +111,7 @@ func Weather(adcode string) {
 	after_48_nightwind := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[2].(map[string]interface{})["nightwind"]
 	after_48_daypower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[2].(map[string]interface{})["daypower"]
 	after_48_nightpower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[2].(map[string]interface{})["nightpower"]
-	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", after_48_date, after_48_week, after_48_dayweather, after_48_daytemp, after_48_daywind, after_48_daypower,  after_48_nightweather, after_48_nighttemp,after_48_nightwind, after_48_nightpower)
+	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", after_48_date, after_48_week, after_48_dayweather, after_48_daytemp, after_48_daywind, after_48_daypower, after_48_nightweather, after_48_nighttemp, after_48_nightwind, after_48_nightpower)
 	after_72_date := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["date"]
 	after_72_week := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["week"]
 	switch after_72_week {
@@ -138,5 +138,5 @@ func Weather(adcode string) {
 	after_72_nightwind := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["nightwind"]
 	after_72_daypower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["daypower"]
 	after_72_nightpower := m["forecasts"].([]interface{})[0].(map[string]interface{})["casts"].([]interface{})[3].(map[string]interface{})["nightpower"]
-	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", after_72_date, after_72_week, after_72_dayweather, after_72_daytemp, after_72_daywind, after_72_daypower, after_72_nightweather , after_72_nighttemp,after_72_nightwind, after_72_nightpower)
+	fmt.Printf("%v 星期%v\t白天%v最高温度%v\u00B0C %v风%v级\t夜间%v最低温度%v\u00B0C %v风%v级\n", after_72_date, after_72_week, after_72_dayweather, after_72_daytemp, after_72_daywind, after_72_daypower, after_72_nightweather, after_72_nighttemp, after_72_nightwind, after_72_nightpower)
 }
