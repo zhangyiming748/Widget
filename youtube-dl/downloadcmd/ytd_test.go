@@ -17,7 +17,6 @@ func TestYtd(t *testing.T) {
 
 }
 
-
 func RunCommand(link string, s *sync.WaitGroup, i int) {
 
 }
@@ -36,24 +35,24 @@ func TestJust(t *testing.T) {
 
 }
 func TestGetJson(t *testing.T) {
-	url:="https://www.pornhub.com/view_video.php?viewkey=ph56a17d4a0d0ad"
-	proxy:="127.0.0.1:8889"
-	ret:=getJson(url,proxy)
-	t.Logf("内容:%v\t类型%T\n",string(ret),ret)
+	url := "https://www.pornhub.com/view_video.php?viewkey=ph56a17d4a0d0ad"
+	proxy := "127.0.0.1:8889"
+	ret := getJson(url, proxy)
+	t.Logf("内容:%v\t类型%T\n", string(ret), ret)
 }
 func TestGetCurrentFile(t *testing.T) {
-	ret, _ :=getCurrentFile("/Users/zen/Github/Widget/youtube-dl")
+	ret, _ := getCurrentFile("/Users/zen/Github/Widget/youtube-dl")
 	t.Log(ret)
 }
 func TestGetJSON(t *testing.T) {
-	url:="https://www.pornhub.com/view_video.php?viewkey=ph5ee70c0f48929"
-	proxy:="127.0.0.1:8889"
-	ret1:=getJson(url,proxy)
-	t.Logf("%s",string(ret1))
-	ret2:=parseJson(ret1)
-	t.Logf("title : %s",ret2)
-	ret3,_:=getCurrentFile(ret2)
-	t.Logf("fullname : %s",ret3)
-	ret4:=isM3u8(ret3)
-	t.Logf("is m3u8? : %t",ret4)
+	url := "https://www.pornhub.com/view_video.php?viewkey=ph5ee70c0f48929"
+	proxy := "127.0.0.1:8889"
+	ret1 := getJson(url, proxy)
+	t.Logf("%s", string(ret1))
+	ret2 := parseJson(ret1)
+	t.Logf("title : %s", ret2)
+	ret3, _ := getCurrentFile(ret2)
+	t.Logf("fullname : %s", ret3)
+	ret4 := isM3u8(ret3)
+	t.Logf("is m3u8? : %t", ret4)
 }

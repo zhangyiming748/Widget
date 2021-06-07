@@ -21,7 +21,7 @@ func main() {
 		os.Exit(0)
 	}
 	passwords := readPasswd.ReadPasswd2Slice(passwds)
-	for _,ps:=range passwords{
-		rarArchive.UnRar(file,ps)
+	for _, ps := range passwords {
+		rarArchive.UnRar(file, ps)
 	}
 }

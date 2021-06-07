@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"youtube-dl/convert"
 	"youtube-dl/downloadcmd"
 	. "youtube-dl/mylog"
 	"youtube-dl/readline"
@@ -92,6 +93,7 @@ func main() {
 		list[v] = true
 	}
 	wg.Wait()
+	convert.Convert()
 	ta := timeNow.DateNowFormatStr()
 	tj := time.Now()
 	Debug.Println(ta)

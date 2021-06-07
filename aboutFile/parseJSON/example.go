@@ -6,14 +6,13 @@ import (
 	"io/ioutil"
 )
 
-
 func main() {
-	filename:="static.json"
+	filename := "static.json"
 	data, err := ioutil.ReadFile(filename)
-	if err !=nil{
+	if err != nil {
 		fmt.Println(err)
 	}
-	json:=string(data)
+	json := string(data)
 	value := gjson.Get(json, "retData.list搞")
 	println(value.String())
 

@@ -11,14 +11,16 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"youtube-dl/convert"
 	. "youtube-dl/mylog"
 	"youtube-dl/util"
 )
 
 func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan struct{}) {
 	path := strings.Join([]string{dir, "%(title)s.%(ext)s"}, "/")
+	s := strings.Join([]string{"%(title)s", "m3u8"}, ".")
+	Debug.Printf("得到的文件名: %s", s)
 	cmd := exec.Command("youtube-dl", "--proxy", proxy, "-o", path, "-f", "best", url)
+	Debug.Printf("生成的命令是: %s", cmd)
 	stdout, err := cmd.StdoutPipe()
 	cmd.Stderr = cmd.Stdout
 	if err != nil {
@@ -30,7 +32,7 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan st
 	for {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
-		if strings.HasSuffix(string(tmp),"has already been downloaded"){
+		if strings.HasSuffix(string(tmp), "has already been downloaded") {
 			Debug.Println("当前文件已存在")
 		}
 		Info.Printf("第%d个文件输出:%s", i+1, string(tmp))
@@ -42,18 +44,23 @@ func RunCmd(url string, wg *sync.WaitGroup, proxy, dir string, i int, ch chan st
 		Error.Printf("%v对应文件:%v\n", err, url)
 	}
 	Info.Printf("下载文件%v完成\n", url)
-	json := getJson(url, proxy)
-	title := parseJson(json)
-	f, notfound := getCurrentFile(title)
-	if notfound != nil {
-		Error.Println("待转换的文件未找到")
-	}
-	fp := getFullpath(f)
-	if isM3u8(fp){
-		Debug.Printf("准备转换文件:%s\n",f)
-		convert.Convert(fp)
-		Debug.Printf("转换文件%s完成",f)
-	}
+	/*
+		json := getJson(url, proxy)
+		title := parseJson(json)
+		f, notfound := getCurrentFile(title)
+		if notfound != nil {
+			Error.Println("待转换的文件未找到")
+		}
+
+		转换m3u8
+		fp := getFullpath(f)
+		if isM3u8(fp){
+			Debug.Printf("准备转换文件:%s\n",f)
+			convert.Convert(fp)
+			Debug.Printf("转换文件%s完成",f)
+		}
+	*/
+
 	//Debug.Printf("fp = %s\n",fp)
 	wait := time.Duration(rand.Intn(3))
 	time.Sleep(wait * time.Second)

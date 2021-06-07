@@ -7,9 +7,10 @@ import (
 )
 
 var (
-	Info *log.Logger
-	Debug *log.Logger
-	Error *log.Logger
+	Info   *log.Logger
+	Debug  *log.Logger
+	Error  *log.Logger
+	FFmpeg *log.Logger
 )
 
 func init() {
@@ -24,8 +25,8 @@ func init() {
 		log.Println(err2)
 	}
 
-	Info = log.New(os.Stdout,"Info:",log.Lmicroseconds)
+	Info = log.New(os.Stdout, "Info:", log.Lmicroseconds)
 	Debug = log.New(io.MultiWriter(debuglog, os.Stdout), "Debug:", log.LstdFlags|log.Lshortfile)
 	Error = log.New(io.MultiWriter(errorlog, os.Stdout), "Error:", log.LstdFlags|log.Lshortfile)
-
+	FFmpeg = log.New(os.Stdout, "ffmpeg:", log.LstdFlags)
 }

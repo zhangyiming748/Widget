@@ -79,7 +79,7 @@ func writeLine(s []string, file string) {
 	for _, v := range s {
 		w := bufio.NewWriter(f) //创建新的 Writer 对象
 		w.WriteString("file ")
-		fv:=strings.Join([]string{GetVal("target","src"),v},"/")
+		fv := strings.Join([]string{GetVal("target", "src"), v}, "/")
 		n, _ := w.WriteString(fv)
 		w.WriteString("\n")
 		fmt.Printf("写入 %d 个字节n", n)

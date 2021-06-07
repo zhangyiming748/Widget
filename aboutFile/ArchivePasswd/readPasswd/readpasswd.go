@@ -8,9 +8,9 @@ import (
 )
 
 func ReadPasswd2Slice(passwd string) []string {
-	passwds:=[]string{}
-	fi,err:=os.Open(passwd)
-	if err!=nil{
+	passwds := []string{}
+	fi, err := os.Open(passwd)
+	if err != nil {
 		fmt.Printf("Error: %s\n", err)
 		return []string{}
 	}

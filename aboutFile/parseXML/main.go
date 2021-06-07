@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/exec"
 	"strings"
-
 	//"strings"
 )
 
@@ -41,15 +40,15 @@ func UseEtree(fname string) {
 		//fmt.Printf("ret = %v\n",ret)
 		url := server.SelectElement("guid").Text()
 		fmt.Printf("url = %v\n", url)
-		cmd:=exec.Command("wget","-O",name+".m4a",url)
-		if err:=cmd.Run();err!=nil{
-			fmt.Printf("运行命令时产生错误 %v",err)
+		cmd := exec.Command("wget", "-O", name+".m4a", url)
+		if err := cmd.Run(); err != nil {
+			fmt.Printf("运行命令时产生错误 %v", err)
 		}
 	}
 
 }
 func GetName(s string) string {
-	if len(strings.Split(s,"《"))<=1{
+	if len(strings.Split(s, "《")) <= 1 {
 		return ""
 	}
 	prefix := strings.Split(s, "《")[1]

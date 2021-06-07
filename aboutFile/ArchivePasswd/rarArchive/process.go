@@ -15,7 +15,7 @@ func UnRar(rarpath string, pass string) {
 	}()
 	if err := cmd.Run(); err != nil {
 		if err.Error() == "exit status 255" {
-			fmt.Printf("file : %s\tpassword is :%s\n",rarpath,pass)
+			fmt.Printf("file : %s\tpassword is :%s\n", rarpath, pass)
 		}
 		//log.Printf("runcmd err:%v\n", err)
 	}
