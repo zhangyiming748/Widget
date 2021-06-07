@@ -1,11 +1,12 @@
 package getFileType
+
 import (
 	"fmt"
 	"net/http"
 	"os"
 )
 
-func Master(fp string)string {
+func Master(fp string) string {
 	// Open File
 	f, err := os.Open(fp)
 	if err != nil {
