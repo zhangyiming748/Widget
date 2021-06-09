@@ -56,6 +56,7 @@ func Passwd(src, dst, password string) {
 //删除已经解压但用了错误密码的空文件
 func delFail(dst string) {
 	//find /Users/zen/Downloads/Downie/ -size -1c -type f -ok rm {} \;
+	//实测可以运行 /usr/bin/find /Users/zen/Downloads/Downie -size -1c -type f -exec rm {} \;
 	cmd := exec.Command("find", dst, "-size", "-1c", "-type", "f", "-exec", "rm", "{}", ";")
 	log.Info.Println(cmd)
 	cmd.Start()
