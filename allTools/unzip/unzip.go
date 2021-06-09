@@ -46,8 +46,17 @@ func Passwd(src, dst, password string) {
 	}
 	if err = cmd.Wait(); err != nil {
 		log.CMD.Println("运行中有错误产生", err)
+
 	} else {
 		log.Info.Printf("文件的密码有可能是%s\n", password)
 	}
 
+}
+
+//删除已经解压但用了错误密码的空文件
+func delFail(dst string) {
+	//find /Users/zen/Downloads/Downie/ -size -1c -type f -ok rm {} \;
+	cmd := exec.Command("find", dst, "-size", "-1c", "-type", "f", "-exec", "rm", "{}", ";")
+	log.Info.Println(cmd)
+	cmd.Start()
 }
