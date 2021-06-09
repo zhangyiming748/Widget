@@ -7,10 +7,6 @@ import (
 	conf "allTools/util/conf"
 	util "allTools/util/file"
 	"os"
-	"path/filepath"
-	"sync"
-	"time"
-
 	// f "allTools/util/file"
 	"allTools/util/log"
 )
@@ -29,21 +25,12 @@ func init() {
 	} else {
 		//os.Remove(dst)
 		log.Info.Println("新建目标文件夹")
-		os.Mkdir(dst, 0644)
-	}
-}
-func initial(wg *sync.WaitGroup)  {
-	files, err := filepath.Glob("./*.log")
-	if err != nil {
-		panic(err)
-	}
-	for _, f := range files {
-		if err := os.Remove(f); err != nil {
-			panic(err)
+		if err := os.Mkdir(dst, 0644); err != nil {
+			/*
+
+			 */
 		}
 	}
-	time.Sleep(5*time.Second)
-	wg.Done()
 }
 
 func main() {
@@ -78,10 +65,10 @@ func main() {
 		}
 	case "Unzip":
 		log.Info.Println("Unzip")
-		keyfile:=conf.GetVal("location","passwd")
-		passwords:=util.ReadLine(keyfile)
-		for _,passwd:=range passwords{
-			unzip.Passwd(src,dst,passwd)
+		keyfile := conf.GetVal("location", "passwd")
+		passwords := util.ReadLine(keyfile)
+		for _, passwd := range passwords {
+			unzip.UnZip(src, dst, passwd)
 		}
 	}
 }
