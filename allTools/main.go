@@ -3,6 +3,7 @@ package main
 import (
 	"allTools/convert"
 	"allTools/rotateVideos"
+	"allTools/unzip"
 	conf "allTools/util/conf"
 	util "allTools/util/file"
 	"os"
@@ -74,6 +75,13 @@ func main() {
 		log.Info.Println("WebpTo")
 		for _, file := range files {
 			convert.WebpTo(src, file)
+		}
+	case "Unzip":
+		log.Info.Println("Unzip")
+		keyfile:=conf.GetVal("location","passwd")
+		passwords:=util.ReadLine(keyfile)
+		for _,passwd:=range passwords{
+			unzip.Passwd(src,dst,passwd)
 		}
 	}
 }
