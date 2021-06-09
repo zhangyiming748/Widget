@@ -10,7 +10,7 @@ import (
 func ToRight(src, dst, file string) {
 	in := strings.Join([]string{src, file}, "/")
 	out := strings.Join([]string{dst, file}, "/")
-	log.Info.Printf("src:%s\tfile:%s\nin:%s\tout:%s\n", src, file,in,out)
+	log.Info.Printf("src:%s\tfile:%s\nin:%s\tout:%s\n", src, file, in, out)
 	t := threads.Threads()
 	cmd := exec.Command("ffmpeg", "-threads", t, "-i", in, "-vf", "transpose=1", "-threads", t, out)
 	log.Info.Printf("生成的命令是:%s", cmd)
@@ -42,7 +42,7 @@ func ToRight(src, dst, file string) {
 func ToLeft(src, dst, file string) {
 	in := strings.Join([]string{src, file}, "/")
 	out := strings.Join([]string{dst, file}, "/")
-	log.Info.Printf("src:%s\tfile:%s\nin:%s\tout:%s\n", src, file,in,out)
+	log.Info.Printf("src:%s\tfile:%s\nin:%s\tout:%s\n", src, file, in, out)
 	t := threads.Threads()
 	cmd := exec.Command("ffmpeg", "-threads", t, "-i", in, "-vf", "transpose=2", "-threads", t, out)
 	log.Info.Printf("生成的命令是:%s", cmd)

@@ -18,12 +18,12 @@ func init() {
 	prefix := conf.GetVal("main", "function")
 	log.SetPrefix(prefix)
 	log.SetFlags(log.Ltime | log.Lshortfile)
-	cmdlog, err1 := os.OpenFile("cmd.log", os.O_WRONLY | os.O_CREATE, 0666)
+	cmdlog, err1 := os.OpenFile("cmd.log", os.O_WRONLY|os.O_CREATE, 0666)
 
 	if err1 != nil {
 		log.Println("打开日志文件错误")
 	}
-	infolog, err2 := os.OpenFile("info.log", os.O_WRONLY | os.O_CREATE, 0666)
+	infolog, err2 := os.OpenFile("info.log", os.O_WRONLY|os.O_CREATE, 0666)
 	if err2 != nil {
 		log.Println("打开日志文件错误")
 	}

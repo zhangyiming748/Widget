@@ -1,9 +1,9 @@
 package util
 
 import (
-"fmt"
-"github.com/widuu/goini"
-"log"
+	"fmt"
+	"github.com/widuu/goini"
+	"log"
 )
 
 const confPath = "./conf.ini"

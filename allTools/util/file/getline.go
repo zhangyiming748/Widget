@@ -14,7 +14,7 @@ func ReadLine(src string) []string {
 		return []string{}
 	}
 	defer func() {
-		if err := fi.Close();err != nil {
+		if err := fi.Close(); err != nil {
 			log.Info.Printf("关闭字典文件失败: %s\n", err)
 		}
 	}()
