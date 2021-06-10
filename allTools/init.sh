@@ -1,6 +1,7 @@
 #!/bin/bash
 find . -type f -name "*.log" -exec rm {} \;
 find . -name "*.go" -exec gofmt -w {} \;
+find . -name ".DS_Store" -exec rm {} \;
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o forLinux main.go
 CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -o forRaspi main.go
 CGO_ENABLED=1 GOOS=windows GOARCH=386 go build -o forWin32.exe main.go
