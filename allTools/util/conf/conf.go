@@ -1,8 +1,8 @@
 package util
 
 import (
-	"fmt"
 	"github.com/widuu/goini"
+	//"allTools/util/log"
 	"log"
 )
 
@@ -28,8 +28,8 @@ func init() {
 func initConfig() {
 	conf = goini.SetConfig(confPath)
 	log.Println(confPath)
-	RunMode = conf.GetValue("direction", "before")
-	fmt.Println("init get runMode", RunMode)
+	RunMode = conf.GetValue("main", "function")
+	log.Println("init get runMode", RunMode)
 }
 
 /**

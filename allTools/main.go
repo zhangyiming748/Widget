@@ -6,9 +6,9 @@ import (
 	"allTools/unzip"
 	conf "allTools/util/conf"
 	util "allTools/util/file"
-	"os"
-	// f "allTools/util/file"
 	"allTools/util/log"
+	"allTools/weather"
+	"os"
 )
 
 var (
@@ -70,6 +70,9 @@ func main() {
 		for _, passwd := range passwords {
 			unzip.UnZip(src, dst, passwd)
 		}
+	case "Weather":
+		log.Info.Println("查询天气")
+		weather.Weather()
 	}
 }
 
