@@ -54,7 +54,7 @@ func main() {
 			}
 		}
 	case "ToWebp":
-		log.Info.Println("ToWebp")
+		log.Info.Println("webp最大宽高不得超过16383像素")
 		for _, file := range files {
 			convert.ToWebp(src, file)
 		}
