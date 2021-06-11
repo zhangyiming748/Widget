@@ -2,6 +2,7 @@ package main
 
 import (
 	"allTools/convert"
+	"allTools/getFileType"
 	"allTools/rotateVideos"
 	"allTools/unzip"
 	conf "allTools/util/conf"
@@ -9,6 +10,7 @@ import (
 	"allTools/util/log"
 	"allTools/weather"
 	"os"
+	"strings"
 )
 
 var (
@@ -40,6 +42,7 @@ func main() {
 	case "ToMp4":
 		log.Info.Println("ToMp4")
 		for _, file := range files {
+			log.Debug.Printf("准备好进行转换的文件:%v", file)
 			convert.ToMp4(src, file)
 		}
 	case "rotate":
@@ -73,7 +76,17 @@ func main() {
 	case "Weather":
 		log.Info.Println("查询天气")
 		weather.Weather()
+	case "Detect":
+		log.Info.Println("探测文件类型")
+		files := util.GetAllFiles(src)
+		for _, file := range files {
+			full := strings.Join([]string{src, file}, "/")
+			log.Debug.Println(full)
+			log.Info.Printf("(%s)的文件类型是:(%s)", file, getFileType.Detect(full))
+
+		}
 	}
+
 }
 
 // 判断所给路径文件/文件夹是否存在
