@@ -20,3 +20,5 @@ testFile
 *.m3u8
 # 忽略测试用命令
 log.sh
+# 忽略vendor
+vendor
