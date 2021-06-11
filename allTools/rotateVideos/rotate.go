@@ -28,7 +28,7 @@ func ToRight(src, dst, file string) {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		log.Info.Println(string(tmp))
+		log.Debug.Println(string(tmp))
 		if err != nil {
 			break
 		}
