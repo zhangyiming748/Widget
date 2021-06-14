@@ -36,6 +36,11 @@ func init() {
 }
 
 func main() {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Info.Printf("程序运行过程中有错误产生:%v", err)
+		}
+	}()
 	files = util.GetFiles(src, pattern)
 	fn := conf.GetVal("main", "function")
 	switch fn {
@@ -83,8 +88,10 @@ func main() {
 			full := strings.Join([]string{src, file}, "/")
 			log.Debug.Println(full)
 			log.Info.Printf("(%s)的文件类型是:(%s)", file, getFileType.Detect(full))
-
 		}
+	default:
+		//log.Info.Println("")
+		panic("没有指定程序功能")
 	}
 
 }
