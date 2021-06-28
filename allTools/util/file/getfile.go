@@ -9,15 +9,19 @@ import (
 func GetFiles(dir, pattern string) []string {
 	files, _ := ioutil.ReadDir(dir)
 	aim := []string{}
+	types := strings.Split(pattern, ";") //"wmv;rm"
 	for _, f := range files {
 		//fmt.Println(f.Name())
 		if l := strings.Split(f.Name(), ".")[0]; len(l) != 0 {
 			//log.Debug.Printf("有效的文件:%v\n", f.Name())
-			if strings.HasSuffix(f.Name(), pattern) {
-				//log.Debug.Printf("有效的目标文件:%v\n", f.Name())
-				//absPath := strings.Join([]string{dir, f.Name()}, "/")
-				//log.Info.Printf("目标文件的绝对路径:%v\n", absPath)
-				aim = append(aim, f.Name())
+			for _, v := range types {
+				if strings.HasSuffix(f.Name(), v) {
+					//log.Debug.Printf("有效的目标文件:%v\n", f.Name())
+					//absPath := strings.Join([]string{dir, f.Name()}, "/")
+					//log.Info.Printf("目标文件的绝对路径:%v\n", absPath)
+					aim = append(aim, f.Name())
+				}
+
 			}
 		}
 	}
