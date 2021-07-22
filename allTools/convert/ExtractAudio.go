@@ -11,7 +11,7 @@ func ExtractAudio(src, file string) {
 	t := threads.Threads()
 	in := strings.Join([]string{src, file}, "/")
 	fname := strings.Split(file, ".")[0]
-	fname = strings.Join([]string{fname, "mp3"}, ".")
+	fname = strings.Join([]string{fname, "m4a"}, ".")
 	out := strings.Join([]string{src, fname}, "/")
 	cmd := exec.Command("ffmpeg", "-threads", t, "-i", in, "-vn", "-y", "-acodec", "copy", "-threads", t, out)
 	//ffmpeg -i 3.mp4 -vn -y -acodec copy 3.m4a
