@@ -89,6 +89,12 @@ func main() {
 			log.Debug.Println(full)
 			log.Info.Printf("(%s)的文件类型是:(%s)", file, getFileType.Detect(full))
 		}
+	case "ExtractAudio":
+		log.Info.Println("提取视频中的音频")
+		files := util.GetAllFiles(src)
+		for _, file := range files {
+			convert.ExtractAudio(src, file)
+		}
 	default:
 		//log.Info.Println("")
 		panic("没有指定程序功能")
