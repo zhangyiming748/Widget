@@ -18,6 +18,7 @@ var (
 	pattern = conf.GetVal("location", "pattern")
 	src     = conf.GetVal("location", "src")
 	dst     = conf.GetVal("location", "dst")
+	delete  = conf.GetVal("main", "delAfterDone")
 )
 
 func init() {
@@ -94,6 +95,14 @@ func main() {
 		files := util.GetAllFiles(src)
 		for _, file := range files {
 			convert.ExtractAudio(src, file)
+			if delete == "ture" {
+				s := strings.Join([]string{src, file}, "/")
+				if err := os.Remove(s); err == nil {
+					log.Info.Printf("删除转换完成的文件%v成功\n", s)
+				} else {
+					log.Info.Printf("删除转换完成的文件%v发生错误\n", s)
+				}
+			}
 		}
 	default:
 		//log.Info.Println("")
