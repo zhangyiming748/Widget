@@ -1,0 +1,64 @@
+{
+  "status": "1",
+  "count": "1",
+  "info": "OK",
+  "infocode": "10000",
+  "forecasts": [
+    {
+      "city": "石景山区",
+      "adcode": "110107",
+      "province": "北京",
+      "reporttime": "2022-05-20 20:33:42",
+      "casts": [
+        {
+          "date": "2022-05-20",
+          "week": "5",
+          "dayweather": "晴",
+          "nightweather": "晴",
+          "daytemp": "32",
+          "nighttemp": "15",
+          "daywind": "西南",
+          "nightwind": "西南",
+          "daypower": "≤3",
+          "nightpower": "≤3"
+        },
+        {
+          "date": "2022-05-21",
+          "week": "6",
+          "dayweather": "晴",
+          "nightweather": "晴",
+          "daytemp": "35",
+          "nighttemp": "18",
+          "daywind": "南",
+          "nightwind": "南",
+          "daypower": "≤3",
+          "nightpower": "≤3"
+        },
+        {
+          "date": "2022-05-22",
+          "week": "7",
+          "dayweather": "晴",
+          "nightweather": "晴",
+          "daytemp": "34",
+          "nighttemp": "20",
+          "daywind": "南",
+          "nightwind": "南",
+          "daypower": "≤3",
+          "nightpower": "≤3"
+        },
+        {
+          "date": "2022-05-23",
+          "week": "1",
+          "dayweather": "多云",
+          "nightweather": "多云",
+          "daytemp": "32",
+          "nighttemp": "20",
+          "daywind": "南",
+          "nightwind": "南",
+          "daypower": "≤3",
+          "nightpower": "≤3"
+        }
+      ]
+    }
+  ]
+}
